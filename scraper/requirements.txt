@@ -1,0 +1,7 @@
+feedparser
+trafilatura
+pymongo
+scikit-learn
+nltk
+python-dotenv
+numpy
