@@ -168,12 +168,17 @@ export default function NewsPulseDashboard() {
                     </span>
                   </div>
 
-                  {/* Visual Bar Span */}
-                  <div className="w-full bg-slate-900 h-3 rounded-full overflow-hidden relative my-2 border border-slate-800">
-                    <div 
-                      className="bg-gradient-to-r from-blue-500 to-teal-400 h-full rounded-full transition-all duration-500"
-                      style={{ width: `${Math.min(100, Math.max(20, cluster.article_count * 15))}%` }}
-                    />
+                  {/* Visual Bar Span & Count */}
+                  <div className="flex items-center gap-3 my-2">
+                    <div className="w-full bg-slate-900 h-3 rounded-full overflow-hidden relative border border-slate-800">
+                      <div 
+                        className="bg-gradient-to-r from-blue-500 to-teal-400 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${Math.min(100, Math.max(10, cluster.article_count * 15))}%` }}
+                      />
+                    </div>
+                    <span className="text-xs font-bold text-slate-100 min-w-[16px] text-right">
+                      {cluster.article_count}
+                    </span>
                   </div>
 
                   <div className="flex justify-between items-center text-xs text-slate-500 mt-2">
