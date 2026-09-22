@@ -64,8 +64,8 @@ app.get('/timeline', async (req, res) => {
   }
 });
 
-// 4. POST /ingest/trigger - Trigger Python scraper script as a background process (Part 2)
-app.post('/ingest/trigger', async (req, res) => {
+// 4. GET /ingest/trigger - Trigger Python scraper script as a background process (Part 2)
+app.get('/ingest/trigger', async (req, res) => {
   const jobId = uuidv4();
 
   try {
@@ -73,7 +73,11 @@ app.post('/ingest/trigger', async (req, res) => {
     await job.save();
 
     const scriptPath = path.join(__dirname, '../scraper/pipeline.py');
-    const pythonProcess = spawn('python3', [scriptPath, jobId]);
+    
+    // Python process ko MONGO_URI pass kiya ja raha hai taaki data Atlas par save ho
+    const pythonProcess = spawn('python3', [scriptPath, jobId], {
+      env: { ...process.env, MONGO_URI: MONGO_URI }
+    });
 
     pythonProcess.stdout.on('data', (data) => {
       console.log(`[Python Output]: ${data}`);
