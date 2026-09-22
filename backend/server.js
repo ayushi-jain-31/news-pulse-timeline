@@ -13,7 +13,9 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/news_pulse';
+
+// MONGODB_URI aur MONGO_URI dono variables support honge
+const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/news_pulse';
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('Connected to MongoDB successfully.'))
